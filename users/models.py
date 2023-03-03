@@ -10,5 +10,5 @@ class User(AbstractUser):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=127, unique=True)
     phone = models.CharField(max_length=20)
-    status = models.BooleanField(default=True, null=False)
+    can_loan = models.BooleanField(default=True, null=False)
     is_superuser = models.BooleanField(default=False)
