@@ -7,7 +7,7 @@
 <hr noshade />
 
 <h2>[201] O sistema deve permitir o cadastro de usuários. </h2>
-<h3>POST - /User</h3>
+<h3>POST - /api/users/</h3>
 
 <strong>Essa rota não necessita autenticação bearer token. Campos de envio para request:</strong>
 
@@ -78,8 +78,49 @@
 </pre>
 <hr noshade />
 
+<h2>[201] O sistema deve permitir o login de usuários. </h2>
+<h3>POST - /api/users/login/</h3>
+
+<strong>Essa rota não necessita autenticação bearer token. Campos de envio para request:</strong>
+
+<ul>
+    <li><strong>username: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+    <li><strong>password: </strong>Entrada obrigatória do tipo string e máximo 20 chars.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para login realizado com sucesso:</p>
+<pre>
+{
+	"refresh":
+     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY3ODczMTI5MSwiaWF0IjoxN
+    jc4MTI2NDkxLCJqdGkiOiIyOWY5OWQ1ZTAxNWY0ZjMyOTVhYjZkN2FhYTI4YzM1OSIsInVzZXJfaWQiOjF9.apwWAwGCQr-yWTWeldPubdLEW13DKNFUjPdJcRevXrU",
+	"access": 
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc4NzMxMjkxLCJpYXQiOjE2NzgxMjY0OTEsImp
+    0aSI6ImQyZjRmNzUyNTJjZjQzODE4YjViMjRiMjRlZTAwYTZlIiwidXNlcl9pZCI6MX0.tQV9c1OiuFGfTk7Tg1WNracmUSfKhY2Rw70CwfoOwYc"
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para campos em branco para essa rota:</p>
+<pre>
+{
+	"username": [
+		"This field may not be blank."
+	],
+	"password": [
+		"This field may not be blank."
+	]
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para usuário sem permissão de uso dessa rota:</p>
+<pre>
+{
+	"detail": "No active account found with the given credentials"
+}
+</pre>
+
+<hr noshade />
+
 <h2>[201] O sistema deve permitir a listagem de usuários. </h2>
-<h3>GET - /User</h3>
+<h3>GET - /api/users/</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Não há Campos de envio para request:</strong>
 
@@ -112,36 +153,6 @@
 		}
 	]
 }
-</pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
-<pre>
-{
-	"username": [
-		"This field may not be blank."
-	],
-	"password": [
-		"This field may not be blank."
-	],
-	"email": [
-		"This field may not be blank."
-	],
-	"first_name": [
-		"This field may not be blank."
-	],
-	"last_name": [
-		"This field may not be blank."
-	],
-	"is_superuser": [
-		"Must be a valid boolean."
-	],
-	"can_loan": [
-		"Must be a valid boolean."
-	],
-	"phone": [
-		"This field may not be blank."
-	]
-}
-
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
 <pre>
