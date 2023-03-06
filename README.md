@@ -78,8 +78,8 @@
 </pre>
 <hr noshade />
 
-<h2>[201] O sistema deve permitir o cadastro de usuários. </h2>
-<h3>POST - /User</h3>
+<h2>[201] O sistema deve permitir a listagem de usuários. </h2>
+<h3>GET - /User</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Não há Campos de envio para request:</strong>
 
