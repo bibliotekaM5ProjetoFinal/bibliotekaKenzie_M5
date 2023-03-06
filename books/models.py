@@ -11,6 +11,6 @@ class Book(models.Model):
 
 class BookCopy(models.Model):
     book = models.ForeignKey(
-        "books.Book", on_delete=models.CASCADE, related_name="book"
+        "books.Book", on_delete=models.CASCADE, related_name="copies"
     )
     added_on = models.DateField(auto_now=True)
