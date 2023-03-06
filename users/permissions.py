@@ -8,6 +8,22 @@ class AuthOnlyPermission(permissions.BasePermission):
         return request.user.is_authenticated
 
 
+class ListingRetrievingDestroyingPermission(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        elif request.method == "PATCH" or "DELETE":
+            return request.user.is_authenticated and request.user.is_superuser
+
+
+class ListingPermissionStaffCreating(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        elif request.method == "POST" and request.user.is_superuser is True:
+            return True and request.user.is_authenticated
+
+
 class StaffListingPermission(permissions.BasePermission):
     def has_permission(self, request: Request, view: View):
         if request.method == "GET" and request.user.is_superuser is True:
