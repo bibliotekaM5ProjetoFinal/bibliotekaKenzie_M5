@@ -1,4 +1,4 @@
-# bibliotekaKenzie_M5
+# BiblioteKaKenzie M5
 <h1>BiblioteKaKenzie</h1>
 
 <h3><strong>Proposta:</strong></h3>
@@ -11,22 +11,27 @@
 <strong>Essa rota não necessita autenticação bearer token. Campos de envio para request:</strong>
 
 <ul>
-    <li><strong>username: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
-    <li><strong>first_name: </strong>Entrada obrigatória do tipo string email e máximo 100 chars.</li>
-    <li><strong>last_name: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
-    <li><strong>email: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
-    <li><strong>password: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+    <li><strong>username: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+    <li><strong>first_name: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+    <li><strong>last_name: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+    <li><strong>email: </strong>Entrada obrigatória do tipo string email e máximo 127 chars.</li>
+    <li><strong>password: </strong>Entrada obrigatória do tipo string e máximo 20 chars.</li>
     <li><strong>phone: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
-    <li><strong>is_superuser: </strong>Entrada opcional do tipo boolean com padrão falso.</li>
+    <li><strong>can_loan: </strong>Entrada opcional do tipo boolean com padrão falso.</li>
+    <li><strong>is_superuser: </strong>Entrada obrigatória do tipo boolean com padrão falso.</li>
 </ul>
 
 <p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para criação realizada com sucesso:</p>
 <pre>
 {
-    "id": "9521d750-a277-4237-bad2-dc2d6d988151",
-    "email": "marcelohm@gmail.com",
-    "name": "Marcelo Henrique Marques",
-    "isActive": true,
+    "id": 1,
+    "username": "daniel_buster_comum",
+    "email": "daniel_common@mail.com",
+    "first_name": "daniel",
+    "last_name": "Comum",
+    "phone": "1999-09-09",
+    "can_loan": false,
+    "is_superuser": false
 }
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
