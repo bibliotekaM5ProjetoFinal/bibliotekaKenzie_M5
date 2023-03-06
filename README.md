@@ -1,4 +1,5 @@
 # BiblioteKaKenzie M5
+
 <h1>BiblioteKaKenzie</h1>
 
 <h3><strong>Proposta:</strong></h3>
@@ -37,13 +38,42 @@
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">400</strong> para request incorreto:</p>
 <pre>
 {
-    "message": yup.error.errors
+	"username": [
+		"This field may not be blank."
+	],
+	"password": [
+		"This field may not be blank."
+	],
+	"email": [
+		"This field may not be blank."
+	],
+	"first_name": [
+		"This field may not be blank."
+	],
+	"last_name": [
+		"This field may not be blank."
+	],
+	"is_superuser": [
+		"Must be a valid boolean."
+	],
+	"can_loan": [
+		"Must be a valid boolean."
+	],
+	"phone": [
+		"This field may not be blank."
+	]
 }
+
 </pre>
 <p>Retorno esperado com status code <strong style="color:red;font-size:18px">409</strong> para email já existente:</p>
 <pre>
 {
-    "message": "Email already registered to another author."
+	"username": [
+		"user with this username already exists."
+	],
+	"email": [
+		"Email Alredy Registered"
+	]
 }
 </pre>
 <hr noshade />
