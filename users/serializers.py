@@ -3,7 +3,15 @@ from rest_framework.validators import UniqueValidator
 from .models import User
 
 
+class FollowListingField(serializers.RelatedField):
+    def to_representation(self, value):
+        follow = {"title": value.book.title, "since": value.start_following}
+        return follow
+
+
 class UserSerializer(serializers.ModelSerializer):
+    following = FollowListingField(read_only=True, many=True)
+
     class Meta:
         model = User
         fields = [
@@ -16,7 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser",
             "can_loan",
             "phone",
+            "following",
         ]
+        depth = 1
         extra_kwargs = {
             "password": {"write_only": True},
             "email": {
