@@ -3,7 +3,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import generics, status
 from books.models import Book
 from users.models import User
-from users.permissions import AuthOnlyPermission, StaffOrOwnerPermission, TestPermission
+from users.permissions import AuthOnlyPermission, StaffOrOwnerPermission
 from .models import Follow
 from rest_framework.views import Response
 
