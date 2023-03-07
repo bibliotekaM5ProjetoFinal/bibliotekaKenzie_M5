@@ -40,8 +40,3 @@ class StaffPermission(permissions.BasePermission):
 class StaffOrOwnerPermission(permissions.BasePermission):
     def has_object_permission(self, request: Request, view: View, obj: User):
         return obj.id == request.user.id or request.user.is_superuser
-
-
-class TestPermission(permissions.BasePermission):
-    def has_permission(self, request: Request, view: View):
-        return request.user.id == view.kwargs.get("pk") or request.user.is_superuser
