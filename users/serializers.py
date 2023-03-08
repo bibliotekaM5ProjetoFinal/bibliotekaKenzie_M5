@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User
+import ipdb
 
 
 class FollowListingField(serializers.RelatedField):
@@ -9,8 +10,20 @@ class FollowListingField(serializers.RelatedField):
         return follow
 
 
+class loansListingField(serializers.RelatedField):
+    def to_representation(self, value):
+        loan = {
+            "id": value.id,
+            "loan_date": value.loan_date,
+            "devolution_date": value.devolution_date,
+            "book_title": value.book_copy.book.title,
+        }
+        return loan
+
+
 class UserSerializer(serializers.ModelSerializer):
     following = FollowListingField(read_only=True, many=True)
+    loans = loansListingField(many=True, read_only=True)
 
     class Meta:
         model = User
@@ -25,6 +38,7 @@ class UserSerializer(serializers.ModelSerializer):
             "can_loan",
             "phone",
             "following",
+            "loans",
         ]
         depth = 1
         extra_kwargs = {
