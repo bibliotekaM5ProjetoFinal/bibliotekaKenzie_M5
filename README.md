@@ -80,7 +80,7 @@
 <hr noshade />
 <!-- =========================================================================================================================================================================: -->
 
-<h2>[201] O sistema deve permitir o login de usuários. </h2>
+<h2>[200] O sistema deve permitir o login de usuários. </h2>
 <h3>POST - /api/users/login/</h3>
 
 <strong>Essa rota não necessita autenticação bearer token. Campos de envio para request:</strong>
@@ -122,7 +122,7 @@
 <hr noshade />
 <!-- =========================================================================================================================================================================: -->
 
-<h2>[201] O sistema deve permitir a listagem de usuários. </h2>
+<h2>[200] O sistema deve permitir a listagem de usuários. </h2>
 <h3>GET - /api/users/</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Apenas usários Admim podem acessar essa rota. Não há Campos de envio para request:</strong>
@@ -167,7 +167,7 @@
 
 <!-- =========================================================================================================================================================================: -->
 
-<h2>[201] O sistema deve permitir a listagem do Profile do usuário. </h2>
+<h2>[200] O sistema deve permitir a listagem do Profile do usuário. </h2>
 <h3>GET - /api/users/user_id</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Usuários não Admim podem acessar apenas o seu próprio Profile. Não há Campos de envio para request:</strong>
@@ -204,7 +204,7 @@
 <hr noshade />
 
 <h2>[201] O sistema deve permitir Cadastro de novos livros.</h2>
-<h3>GET - /api/users/user_id</h3>
+<h3>POST - /api/books/</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Usuários não Admim podem acessar apenas o seu próprio Profile. Não há Campos de envio para request:</strong>
 
