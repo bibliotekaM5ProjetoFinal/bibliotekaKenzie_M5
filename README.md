@@ -206,7 +206,7 @@
 <h2>[201] O sistema deve permitir Cadastro de novos livros.</h2>
 <h3>POST - /api/books/</h3>
 
-<strong>Essa rota necessita autenticação bearer token. Apenas usuaários Admim podem acessar essa rota. Campos de envio para request:</strong>
+<strong>Essa rota necessita autenticação bearer token. Apenas usuários Admim podem acessar essa rota. Campos de envio para request:</strong>
 <ul>
     <li><strong>title: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
     <li><strong>author: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
