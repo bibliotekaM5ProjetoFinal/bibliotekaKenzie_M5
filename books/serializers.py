@@ -4,10 +4,12 @@ from rest_framework import serializers
 from users.models import User
 from .models import Book, BookCopy
 from rest_framework.response import Response
-import ipdb
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 
 
 class BookCopyFieldSerializer(serializers.ModelSerializer):
+    @extend_schema_field(OpenApiTypes.OBJECT)
     class LoanListingField(serializers.RelatedField):
         def to_representation(self, value):
             loan = {
@@ -30,9 +32,10 @@ class BookCopyFieldSerializer(serializers.ModelSerializer):
         }
 
 
+@extend_schema_field(OpenApiTypes.OBJECT)
 class FollowedListingField(serializers.RelatedField):
     def to_representation(self, value):
-        follow = {"email": value.user.email, "since": value.start_following}
+        follow = {"username": value.user.username, "since": value.start_following}
         return follow
 
 
@@ -50,6 +53,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class BookCopySerializer(serializers.ModelSerializer):
+    @extend_schema_field(OpenApiTypes.OBJECT)
     class LoanListingField(serializers.RelatedField):
         def to_representation(self, value):
             loan = {

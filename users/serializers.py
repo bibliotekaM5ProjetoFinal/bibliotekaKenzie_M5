@@ -1,15 +1,18 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User
-import ipdb
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 
 
+@extend_schema_field(OpenApiTypes.OBJECT)
 class FollowListingField(serializers.RelatedField):
     def to_representation(self, value):
         follow = {"title": value.book.title, "since": value.start_following}
         return follow
 
 
+@extend_schema_field(OpenApiTypes.OBJECT)
 class loansListingField(serializers.RelatedField):
     def to_representation(self, value):
         loan = {
