@@ -207,6 +207,7 @@
 <h3>POST - /api/books/</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Apenas usuários Admim podem acessar essa rota. Campos de envio para request:</strong>
+
 <ul>
     <li><strong>title: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
     <li><strong>author: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
@@ -239,4 +240,254 @@
 }
 </pre>
 <hr noshade />
+<!-- =========================================================================================================================================================================: -->
+
+<h2>[200] O sistema deve permitir a listagem de Livros. </h2>
+<h3>GET - /api/books/</h3>
+
+<strong>Essa rota não necessita autenticação bearer token. Não há Campos de envio para request:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para listagem realizada com sucesso:</p>
+<pre>
+{
+	"count": 2,
+	"next": null,
+	"previous": null,
+	"results": [
+		{
+			"id": 1,
+			"title": "Uma senhora enrrascada",
+			"author": "Yojimbo",
+			"synopsis": "Um livro sobre uma grnad enrrascada",
+			"copies": [
+				{
+					"id": 1,
+					"added_on": "2023-03-08",
+					"loans": [
+						{
+							"id": 1,
+							"loan_date": "2023-03-08",
+							"devolution_date": "2023-03-08",
+							"user_username": "Mikhail_Book"
+						}
+					]
+				}
+			],
+			"followed_by": []
+		},
+		{
+			"id": 2,
+			"title": "Uma senhora enrrascada 2",
+			"author": "Yojimbo",
+			"synopsis": "Um livro sobre uma grnad enrrascada",
+			"copies": [
+				{
+					"id": 2,
+					"added_on": "2023-03-08",
+					"loans": [
+						{
+							"id": 2,
+							"loan_date": "2023-03-08",
+							"devolution_date": "2023-03-08",
+							"user_username": "Mikhail_Book"
+						},
+						{
+							"id": 3,
+							"loan_date": "2023-03-08",
+							"devolution_date": null,
+							"user_username": "Mikhail_Book"
+						}
+					]
+				},
+				{
+					"id": 3,
+					"added_on": "2023-03-08",
+					"loans": []
+				}
+			],
+			"followed_by": []
+		}
+	]
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
+<hr noshade />
+
+<!-- =========================================================================================================================================================================: -->
+
+<h2>[200] O sistema deve permitir a listagem de um Livro específico. </h2>
+<h3>GET - /api/books/</h3>
+
+<strong>Essa rota não necessita autenticação bearer token. Não há Campos de envio para request:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para listagem realizada com sucesso:</p>
+<pre>
+{
+	"id": 1,
+	"title": "Uma senhora enrrascada",
+	"author": "Yojimbo",
+	"synopsis": "Um livro sobre uma grnad enrrascada",
+	"copies": [
+		{
+			"id": 1,
+			"added_on": "2023-03-08",
+			"loans": [
+				{
+					"id": 1,
+					"loan_date": "2023-03-08",
+					"devolution_date": "2023-03-08",
+					"user_username": "Mikhail_Book"
+				}
+			]
+		}
+	],
+	"followed_by": []
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
+<hr noshade />
+
+<!-- =========================================================================================================================================================================: -->
+
+<h2>[201] O sistema deve permitir Atualização de informações dos livros.</h2>
+<h3>POST - /api/books/</h3>
+
+<strong>Essa rota necessita autenticação bearer token. Apenas usuários Admim podem acessar essa rota. Possíveis Campos de envio para request:</strong>
+
+<ul>
+    <li><strong>title: </strong>Entrada obrigatória do tipo string e máximo 100 chars.</li>
+    <li><strong>author: </strong>Entrada obrigatória do tipo string e máximo 50 chars.</li>
+    <li><strong>synopsis: </strong>Entrada obrigatória do tipo Text.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<pre>
+{
+	"id": 1,
+	"title": "Lagoa Azul, Redacted",
+	"author": "Yojimbo",
+	"synopsis": "Um livro sobre uma grnad enrrascada",
+	"copies": [
+		{
+			"id": 1,
+			"added_on": "2023-03-08",
+			"loans": [
+				{
+					"id": 1,
+					"loan_date": "2023-03-08",
+					"devolution_date": "2023-03-08",
+					"user_username": "Mikhail_Book"
+				}
+			]
+		}
+	],
+	"followed_by": []
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
+<pre>
+{
+	"detail": "You do not have permission to perform this action."
+}
+</pre>
+<hr noshade />
+<!-- =========================================================================================================================================================================: -->
+
+<h2>Rotas de Copies:</h2>
+<hr noshade />
+
+<h2>[201] O sistema deve permitir a criação de Cópias dos livros.</h2>
+<h3>POST - /api/books/id_book/copies</h3>
+
+<strong>Essa rota necessita autenticação bearer token. Apenas usuários Admim podem acessar essa rota. Não possui Campos de envio para request:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<pre>
+{
+	"id": 3,
+	"book": {
+		"id": 2,
+		"title": "Uma senhora enrrascada 2",
+		"author": "Yojimbo",
+		"synopsis": "Um livro sobre uma grnad enrrascada"
+	},
+	"added_on": "2023-03-08",
+	"loans": []
+}
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
+<pre>
+{
+	"detail": "You do not have permission to perform this action."
+}
+</pre>
+<hr noshade />
+
+<!-- =========================================================================================================================================================================: -->
+
+<h2>[200] O sistema deve permitir a listagem de Cópias dos livros.</h2>
+<h3>GET - /api/books/id_book/copies</h3>
+
+<strong>Essa rota necessita autenticação bearer token. Não possui Campos de envio para request:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<pre>
+{
+	"count": 1,
+	"next": null,
+	"previous": null,
+	"results": [
+		{
+			"id": 1,
+			"book": {
+				"id": 1,
+				"title": "Lagoa Azul, Redacted",
+				"author": "Yojimbo",
+				"synopsis": "Um livro sobre uma grnad enrrascada"
+			},
+			"added_on": "2023-03-08",
+			"loans": [
+				{
+					"id": 1,
+					"loan_date": "2023-03-08",
+					"devolution_date": "2023-03-08",
+					"user_username": "Mikhail_Book"
+				}
+			]
+		}
+	]
+}
+</pre>
+<hr noshade />
+
+<!-- =========================================================================================================================================================================: -->
+
+<h2>[200] O sistema deve permitir a consulta de uma cópia específica.</h2>
+<h3>GET - /api/books/id_book/copies/id_copy</h3>
+
+<strong>Essa rota necessita autenticação bearer token. Não possui Campos de envio para request:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<pre>
+{
+	"id": 1,
+	"book": {
+		"id": 1,
+		"title": "Lagoa Azul, Redacted",
+		"author": "Yojimbo",
+		"synopsis": "Um livro sobre uma grnad enrrascada"
+	},
+	"added_on": "2023-03-08",
+	"loans": [
+		{
+			"id": 1,
+			"loan_date": "2023-03-08",
+			"devolution_date": "2023-03-08",
+			"user_username": "Mikhail_Book"
+		}
+	]
+}
+</pre>
+<hr noshade />
+
 <!-- =========================================================================================================================================================================: -->
