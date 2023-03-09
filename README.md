@@ -112,12 +112,6 @@
 	]
 }
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">401</strong> para usuário sem permissão de uso dessa rota:</p>
-<pre>
-{
-	"detail": "No active account found with the given credentials"
-}
-</pre>
 
 <hr noshade />
 <!-- =========================================================================================================================================================================: -->
@@ -310,13 +304,12 @@
 	]
 }
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
 <hr noshade />
 
 <!-- =========================================================================================================================================================================: -->
 
 <h2>[200] O sistema deve permitir a listagem de um Livro específico. </h2>
-<h3>GET - /api/books/</h3>
+<h3>GET - /api/books/id_book</h3>
 
 <strong>Essa rota não necessita autenticação bearer token. Não há Campos de envio para request:</strong>
 
@@ -344,13 +337,12 @@
 	"followed_by": []
 }
 </pre>
-<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
 <hr noshade />
 
 <!-- =========================================================================================================================================================================: -->
 
-<h2>[201] O sistema deve permitir Atualização de informações dos livros.</h2>
-<h3>POST - /api/books/</h3>
+<h2>[201] O sistema deve permitir Atualização de informações de um livro específico.</h2>
+<h3>PATCH - /api/books/id_book</h3>
 
 <strong>Essa rota necessita autenticação bearer token. Apenas usuários Admim podem acessar essa rota. Possíveis Campos de envio para request:</strong>
 
@@ -360,7 +352,7 @@
     <li><strong>synopsis: </strong>Entrada obrigatória do tipo Text.</li>
 </ul>
 
-<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">201</strong> para atualização realizada com sucesso:</p>
 <pre>
 {
 	"id": 1,
@@ -516,7 +508,7 @@
 
 <!-- =========================================================================================================================================================================: -->
 <h2>[201] O sistema deve permitir a listagem de follows de livros</h2>
-<h3>POST - /api/follows/</h3>
+<h3>GET - /api/follows/</h3>
 
 <strong>Essa rota necessita de autenticação bearer token. Não há campos de envio para request:</strong>
 
