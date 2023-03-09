@@ -25,7 +25,8 @@ class LoanView(generics.ListCreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user: User = serializer.validated_data["user"]
-        book_copy = serializer.validated_data["book_copy"]
+        book_copy: BookCopy = serializer.validated_data["book_copy"]
+
         # :: Checagens por cópia ::
         for loan in Loan.objects.filter(book_copy=book_copy):
             # se a cópia do livro já está emprestada a um usuário
@@ -36,33 +37,16 @@ class LoanView(generics.ListCreateAPIView):
                 )
 
         # :: Checagens por usuário ::
-        for loan in Loan.objects.filter(user=user):
-            today_date = datetime.now().date()
-            expiration_date = loan.loan_date + timedelta(days=7)
-            # se o usuário ainda não entregou uma cópia pendente.
-            if loan.devolution_date is None and today_date > expiration_date:
-                user.can_loan = False
-                user.save()
-                return Response(
-                    {"detail": "The user has not returned expired loans"},
-                    status=status.HTTP_403_FORBIDDEN,
-                )
-    
-            # se o usuário entregou a cópia, porém, fora do prazo
-            if loan.devolution_date:
-                if loan.devolution_date > expiration_date:
-                    block_date = loan.devolution_date + timedelta(days=2)
-                    if today_date < block_date:
-                        user.can_loan = False
-                        user.save()
-                        return Response(
-                            {
-                                "detail": "The user is temporarily blocked from making loans"
-                            },
-                            status=status.HTTP_403_FORBIDDEN,
-                        )
+        if not user.can_loan:
+            return Response(
+                {"detail": "The user is blocked and can not make new loans"}, 
+                status=status.HTTP_403_FORBIDDEN
+            )
 
-        serializer.save(user=user, book_copy=book_copy)
+        serializer.save(
+            user=user, 
+            book_copy=book_copy
+        )
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
