@@ -491,3 +491,62 @@
 <hr noshade />
 
 <!-- =========================================================================================================================================================================: -->
+<h2>Rotas de Follows:</h2>
+<hr noshade />
+
+<h2>[201] O sistema deve permitir a seguir um livro.</h2>
+<h3>POST - /api/follows/</h3>
+
+<strong>Essa rota necessita de autenticação bearer token. Campos de envio para request:</strong>
+
+<ul>
+    <li><strong>bookId: </strong>Entrada obrigatória do tipo interger.</li>
+</ul>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<pre>
+{
+	"id": 2,
+	"start_following": "2023-03-09",
+	"user": "mikhail@biblioteka.com",
+	"book": "Lagoa Azul, Redacted"
+}
+</pre>
+<hr noshade />
+
+<!-- =========================================================================================================================================================================: -->
+<h2>[201] O sistema deve permitir a listagem de follows de livros</h2>
+<h3>POST - /api/follows/</h3>
+
+<strong>Essa rota necessita de autenticação bearer token. Não há campos de envio para request:</strong>
+
+<p>Retorno esperado com status code <strong style="color:LimeGreen;font-size:18px">200</strong> para atualização realizada com sucesso:</p>
+<pre>
+[
+	{
+		"id": 1,
+		"start_following": "2023-03-09",
+		"user": "mikhail@biblioteka.com",
+		"book": "Lagoa Azul, Redacted"
+	},
+	{
+		"id": 2,
+		"start_following": "2023-03-09",
+		"user": "mikhail@biblioteka.com",
+		"book": "Lagoa Azul, Redacted"
+	},
+	{
+		"id": 3,
+		"start_following": "2023-03-09",
+		"user": "mikhail@biblioteka.com",
+		"book": "Lagoa Azul, Redacted"
+	}
+]
+</pre>
+<p>Retorno esperado com status code <strong style="color:red;font-size:18px">403</strong> para usuário sem permissão de uso dessa rota:</p>
+<pre>
+{
+	"detail": "You do not have permission to perform this action."
+}
+</pre>
+<hr noshade />
