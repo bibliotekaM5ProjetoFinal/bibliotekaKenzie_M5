@@ -10,8 +10,13 @@ from users.permissions import (
 )
 from .models import Book, BookCopy
 from .serializers import BookSerializer, BookCopySerializer
+
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field, extend_schema
 from drf_spectacular.utils import extend_schema
 import ipdb
+# Create your views here.
+
 
 
 class BookView(generics.ListCreateAPIView):
@@ -20,6 +25,7 @@ class BookView(generics.ListCreateAPIView):
 
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
 
 
 class FeedBooksView(generics.ListAPIView):
