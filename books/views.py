@@ -10,6 +10,8 @@ from users.permissions import (
 )
 from .models import Book, BookCopy
 from .serializers import BookSerializer, BookCopySerializer
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field, extend_schema
 
 # Create your views here.
 
@@ -22,6 +24,7 @@ class BookView(generics.ListCreateAPIView):
     serializer_class = BookSerializer
 
 
+@extend_schema(methods=["PUT"], exclude=True)
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [ListingRetrievingDestroyingPermission]
