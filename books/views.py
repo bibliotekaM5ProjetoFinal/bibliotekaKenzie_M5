@@ -11,6 +11,7 @@ from users.permissions import (
 from .models import Book, BookCopy
 from .serializers import BookSerializer, BookCopySerializer
 from drf_spectacular.utils import extend_schema
+import ipdb
 
 
 class BookView(generics.ListCreateAPIView):
@@ -19,6 +20,20 @@ class BookView(generics.ListCreateAPIView):
 
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+
+class FeedBooksView(generics.ListAPIView):
+    queryset = BookCopy.objects.all()
+    serializer_class = BookCopySerializer
+
+    def get(self, request, *args, **kwargs):
+        sorted_list = sorted(
+            self.queryset.values(), key=lambda d: d["id"], reverse=True
+        )
+        serializer = self.get_serializer(sorted_list, many=True)
+        print(serializer.data)
+        # serializer.is_valid(raise_exception=True)
+        return Response(serializer.data)
 
 
 @extend_schema(methods=["PUT"], exclude=True)
