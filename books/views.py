@@ -15,8 +15,8 @@ from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema_field, extend_schema
 from drf_spectacular.utils import extend_schema
 import ipdb
-# Create your views here.
 
+# Create your views here.
 
 
 class BookView(generics.ListCreateAPIView):
@@ -27,15 +27,17 @@ class BookView(generics.ListCreateAPIView):
     serializer_class = BookSerializer
 
 
-
 class FeedBooksView(generics.ListAPIView):
     queryset = BookCopy.objects.all()
     serializer_class = BookCopySerializer
 
     def get(self, request, *args, **kwargs):
-        sorted_list = sorted(
-            self.queryset.values(), key=lambda d: d["id"], reverse=True
-        )
+        queryset = BookCopy.objects.all().order_by("-added_on")
+        sorted_list = queryset
+        page = self.paginate_queryset(sorted_list)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(sorted_list, many=True)
         print(serializer.data)
         # serializer.is_valid(raise_exception=True)
