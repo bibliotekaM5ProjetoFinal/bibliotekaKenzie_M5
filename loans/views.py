@@ -9,6 +9,7 @@ from users.permissions import StaffPermission
 from .models import Loan
 from .serializers import LoanSerializer
 from datetime import datetime, timedelta
+from drf_spectacular.utils import extend_schema
 import ipdb
 
 # Create your views here.
@@ -50,6 +51,7 @@ class LoanView(generics.ListCreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+@extend_schema(methods=["PUT"], exclude=True)
 class LoanDetailView(generics.RetrieveUpdateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [StaffPermission]

@@ -10,6 +10,7 @@ from users.permissions import (
     StaffPermission,
 )
 from users.serializers import UserSerializer
+from drf_spectacular.utils import extend_schema
 
 
 class UserView(generics.ListCreateAPIView):
@@ -19,7 +20,7 @@ class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
+@extend_schema(methods=["PUT"], exclude=True)
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [AuthOnlyPermission, StaffOrOwnerPermission]

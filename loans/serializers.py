@@ -7,16 +7,19 @@ from .models import Loan
 from datetime import datetime, timedelta
 from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
-import ipdb
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 
 
 class LoanSerializer(serializers.ModelSerializer):
     user_email = serializers.SerializerMethodField()
     book_title = serializers.SerializerMethodField()
 
+    @extend_schema_field(OpenApiTypes.EMAIL)
     def get_user_email(self, obj):
         return obj.user.email
 
+    @extend_schema_field(OpenApiTypes.STR)
     def get_book_title(self, obj):
         return obj.book_copy.book.title
 
