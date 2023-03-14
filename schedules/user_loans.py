@@ -41,7 +41,7 @@ def check_user_loans(loan: Loan, user: User):
             subject="Suspension",
             message=f"As you didn't returned the loaned book, you will be blocked from new loans. return your loaned books first, before getting new ones. For each day after the expiration date your fee will increase in 0.50 cents, per book that you have after their expiration date.",
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=user.email,
+            recipient_list=[user.email],
             fail_silently=False,
         )
 
@@ -65,6 +65,6 @@ def check_user_loans(loan: Loan, user: User):
             subject="Loaned Books",
             message=f"You have one more day before your limit for returning some of your loaned books!",
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=user.email,
+            recipient_list=[user.email],
             fail_silently=False,
         )
